@@ -440,12 +440,49 @@ a{
 }
 
 
-.icons-container{
-    display: grid;
-    gap:2rem;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+.icons-container {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Para tablets: forzar 2 columnas */
+@media (min-width: 600px) and (max-width: 1350px) {
+  .icons-container {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Para celulares: forzar 1 columna */
+@media (max-width: 599px) {
+  .icons-container {
+    grid-template-columns: 1fr;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .icons {
+    padding: 1.2rem;
+  }
+
+  .icons p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+
+  .facts-icon {
+    font-size: 3rem;
+  }
+
+  .icons h3 {
+    font-size: 2rem;
+  }
 }
 
 
