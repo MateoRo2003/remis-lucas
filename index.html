@@ -210,7 +210,7 @@
             <h3>Traslados con atención personalizada</h3>
             <p>Mi nombre es <strong>Lucas Gabriel Kozak</strong>, soy remisero independiente y brindo servicios de transporte turístico en <strong>Puerto Iguazú, Foz do Iguaçu, Ciudad del Este</strong> y a todos los puntos turísticos de <strong>Misiones</strong>, Argentina.</p>
             <p>Me encargo de llevarte hasta el destino que elijas, esperarte el tiempo que necesites y asegurarme de que tengas una experiencia tranquila y puntual. Trabajo con responsabilidad y atención directa para que disfrutes al máximo tu visita a las Cataratas, las Misiones Jesuíticas, las Minas de Wanda, Salto Encantado y muchos otros destinos imperdibles de nuestra provincia.</p>
-            <a href="#contact-us" class="btn"> Contactarme <span class="fas fa-chevron-right"></span> </a>
+            <a href="#driver-gallery" class="btn">Nuestros Recuerdos <span class="fas fa-chevron-right"></span> </a>
         </div>
 
     </div>
@@ -272,7 +272,7 @@
     <div class="box-container">
 
         <!-- PUERTO IGUAZÚ -->
-        <div class="box mix iguazu tour-box data-aos="zoom-in">
+        <div class="box mix iguazu tour-box" data-aos="zoom-in">
             <img src="image/Cataratas-del-Iguazú.webp" alt="Cataratas del Iguazú">
             <h3>Cataratas del Iguazú (lado argentino)</h3>
             <span class="desc">Una de las siete maravillas naturales del mundo. Paseos como Garganta del Diablo, Circuito Superior e Inferior. Tren ecológico y senderos naturales.</span>
@@ -433,6 +433,58 @@
 </section>
 
 
+<section class="doctors" id="driver-gallery">
+
+    <h3 class="heading">Momentos del <span>viaje</span></h3>
+
+    <!-- <div class="filter-controls">
+        <button class="filter-btn" data-filter=".remisero">Sobre Lucas</button>
+        <button class="filter-btn" data-filter=".pasajeros">Con pasajeros</button>
+    </div> -->
+
+    <div class="box-container">
+
+        <!-- REMISERO Y AUTO -->
+        <div class="box mix remisero" data-aos="fade-up">
+            <img src="image/remisero-1.webp" alt="Lucas con su auto">
+        </div>
+
+        <div class="box mix remisero" data-aos="fade-up">
+            <img src="image/remisero-2.webp" alt="Auto del remisero">
+        </div>
+          <div class="box mix remisero" data-aos="fade-up">
+            <img src="image/remisero-4.webp" alt="Auto del remisero">
+        </div>
+        <div class="box mix remisero" data-aos="fade-up">
+            <img src="image/remisero-5.webp" alt="Auto del remisero">
+        </div>
+        <div class="box mix remisero" data-aos="fade-up">
+            <img src="image/remisero-6.webp" alt="Auto del remisero">
+        </div>
+        <!-- CON PASAJEROS -->
+        <div class="box mix pasajeros" data-aos="fade-up">
+            <img src="image/pasajero-1.webp" alt="Pasajeros en Cataratas">
+        </div>
+        <div class="box mix pasajeros" data-aos="fade-up">
+            <img src="image/pasajero-2.webp" alt="Pasajeros en Cataratas">
+        </div>
+        <div class="box mix pasajeros" data-aos="fade-up">
+            <img src="image/pasajero-3.webp" alt="Pasajeros en Cataratas">
+        </div>
+
+        <div class="box mix pasajeros" data-aos="fade-up">
+            <img src="image/pasajero-4.webp" alt="Pasajeros en tour personalizado">
+        </div>
+        <div class="box mix pasajeros" data-aos="fade-up">
+            <img src="image/pasajero-5.webp" alt="Pasajeros en tour personalizado">
+        </div>
+        <div class="box mix pasajeros" data-aos="fade-up">
+            <img src="image/remisero-3.webp" alt="Pasajeros en tour personalizado">
+        </div>
+
+    </div>
+
+</section>
 
 
 
@@ -445,24 +497,25 @@
       const matches = selectedCategory === 'all' || box.classList.contains(selectedCategory);
 
       if (matches) {
-        box.classList.remove('fade-out');
-        box.classList.add('fade-in');
+        box.classList.remove('fade-out', 'aos-animate'); // importante quitar para reiniciar animación
         box.style.display = 'block';
 
-        // AOS reset para que vuelva a animar si es necesario
-        box.setAttribute('data-aos', 'zoom-in'); 
+        setTimeout(() => {
+          box.classList.add('fade-in');
+          // re-triggear AOS
+          AOS.refresh();
+        }, 50);
       } else {
-        // fade-out y ocultar después
         box.classList.remove('fade-in');
         box.classList.add('fade-out');
-
         setTimeout(() => {
           box.style.display = 'none';
-        }, 400); // igual al tiempo de fadeOut
+          box.classList.remove('aos-animate'); // asegurar reinicio
+        }, 400); // mismo que el fade-out
       }
     });
 
-    setTimeout(() => AOS.refresh(), 600);
+    setTimeout(() => AOS.refreshHard(), 600); // fuerza el refresco completo
   }
 
   filterButtons.forEach(button => {
@@ -482,7 +535,7 @@
       btn.classList.toggle('active', btn.getAttribute('data-filter') === '.iguazu');
     });
 
-    setTimeout(() => AOS.refresh(), 1000);
+    setTimeout(() => AOS.refreshHard(), 1000);
   });
 </script>
 
